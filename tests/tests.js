@@ -15,7 +15,7 @@ describe("format method",function(){
          var input = {x:1,y:2,z:3};
          var rename = {x:"a",y:'b',z:'c'};
          
-         var r = mapData(input,{rename:rename});
+         var r = shiva.transform(input,{rename:rename});
 
          r.should.have.format(["a","b","c"]);
          
@@ -25,7 +25,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = mapData(input,{only:["y","z"]});
+         var r = shiva.transform(input,{only:["y","z"]});
 
          r.should.have.format(["y","z"]);
          
@@ -36,7 +36,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = mapData(input,{only:["y"],rename:{y:"b"} });
+         var r = shiva.transform(input,{only:["y"],rename:{y:"b"} });
 
          r.should.have.format(["b"]);
          
@@ -48,7 +48,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = mapData(input,{expect:["y"]});
+         var r = shiva.transform(input,{expect:["y"]});
 
          r.should.have.format(["x","z"]);
          
@@ -59,7 +59,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = mapData(input,{except:["y"],rename:{x:"a",z:"c"} });
+         var r = shiva.transform(input,{except:["y"],rename:{x:"a",z:"c"} });
 
          r.should.have.format(["a","c"]);
          
@@ -70,7 +70,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = mapData(input,{only:[],
+         var r = shiva.transform(input,{only:[],
             methods:{sum:function(input){ 
                             var sum = input.x + input.y + input.z;
                             var avg = sum/3.0;
@@ -89,7 +89,7 @@ describe("format method",function(){
 
         var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
 
-        var r = mapData(input,{only:[],array:[{property:"comments",mapper:{
+        var r = shiva.transform(input,{only:[],array:[{property:"comments",mapper:{
          only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
 
         }
@@ -102,7 +102,7 @@ describe("format method",function(){
     it("should map an base array of objects",function(){
        var comments = [{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]
         
-       var r = mapData(comments,{only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}});
+       var r = shiva.transform(comments,{only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}});
        r.should.have.format({type:"array",format:["text","creatorId"] })
        
          
@@ -112,11 +112,11 @@ describe("format method",function(){
     it("should use function as a mapper for any value",function(){
     
        var input = 1;
-       var output = mapData(input,function(i){return i+ 1});
+       var output = shiva.transform(input,function(i){return i+ 1});
        output.should.equal(2);
        
        input = [1,2,3];
-       output = mapData(input,function(i){return i+1;});
+       output = shiva.transform(input,function(i){return i+1;});
        output[0].should.equal(2);
        output[1].should.equal(3);
        output[2].should.equal(4);
@@ -130,7 +130,7 @@ describe("format method",function(){
     it("should transform the result",function(){
         var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
 
-        var r = mapData(input,{only:[],array:[{property:"comments",mapper:{
+        var r = shiva.transform(input,{only:[],array:[{property:"comments",mapper:{
          only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
 
         }
@@ -147,7 +147,7 @@ describe("format method",function(){
     
         var input = {x:10};
         
-        var r = mapData(input,{properties:{x:function(v){
+        var r = shiva.transform(input,{properties:{x:function(v){
              return v > 5;
         }
         }})
@@ -162,7 +162,7 @@ describe("format method",function(){
     
         var input = {x:10,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
         
-        var r = mapData(input,{properties:{comments:{rename:{postText:"text",partyId:"userId"}}}})
+        var r = shiva.transform(input,{properties:{comments:{rename:{postText:"text",partyId:"userId"}}}})
     
         r.should.have.format(["x",{name:'comments',type:"array",format:['text','userId']}]);
         

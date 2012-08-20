@@ -18,14 +18,15 @@ include the dependencies and the file shiva.js in the page you want to use.
 
 Using
 -----
- mapData(input,options)
+
+shiva.transform(input,options)
 
 maps the input according to options.
 
 input can be any object/basic data type, array. if it is an array, the mapping will be applied to each data.
 
-options: it can be a function or a mapper
-if it is a function then it takes the input and output is the return value of the function.
+options: it can be a function or a object
+if it is a function then it takes the input as the argument and output is the return value of the function. If the input is an array then the function is called for each input element.
 
 if the input is an array then the function is executed for each element of the array. and the output array is returned.
 

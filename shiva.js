@@ -18,14 +18,18 @@
 //pending: 
 //pipes: temp(transform)
 //   
-//   
-function mapData(input,options)
+//  
+
+var shiva = {};
+
+ 
+shiva.transform = function(input,options)
 {
       if(_.isArray(input))
       {
           var oArray = []
           _.each(input,function(i){
-             var o = mapData(i,options);
+             var o = shiva.transform(i,options);
              oArray.push(o);
           })
           return oArray;
@@ -95,7 +99,7 @@ function mapData(input,options)
           var outputArray = [];
           //loop the
           _.each(inputArray,function(ia){
-               var oa = mapData(ia,mapper);
+               var oa = shiva.transform(ia,mapper);
                  
                outputArray.push(oa);
           
@@ -126,7 +130,7 @@ function mapData(input,options)
             }
             else if(_.isObject(v) ) //when value is also an object/array
             {
-               var prop_value = mapData(input[k],v);
+               var prop_value = shiva.transform(input[k],v);
                var prop_result = {};
                prop_result[k] = prop_value;
      
