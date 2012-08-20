@@ -2,6 +2,13 @@ shiva.js
 ========
 
 A javascript library to transform/ map json objects.
+Using this you can do the following transformations on a json object:
+
+ => select only some properties.
+ => select all but some properties.
+ => rename properties.
+ => transform individual properties
+ => do the above operations on an array.
 
 
 
