@@ -85,20 +85,6 @@ describe("format method",function(){
     });
 
 
-    it("should map an array of fields",function(){
-
-        var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
-
-        var r = shiva.transform(input,{only:[],array:[{property:"comments",mapper:{
-         only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
-
-        }
-        } ]});
-
-        r.should.have.format([{name:"comments", type:"array",format:["text","creatorId"] }])
-
-    })
-    
     it("should map an base array of objects",function(){
        var comments = [{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]
         
@@ -130,14 +116,12 @@ describe("format method",function(){
     it("should transform the result",function(){
         var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
 
-        var r = shiva.transform(input,{only:[],array:[{property:"comments",mapper:{
+        var r = shiva.transform(input,{only:["comments"],properties:{"comments":{
          only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
-
         }
-        }],
-        transform:function(res){return res.comments}
+        },
+        transform:function(res){ return res.comments}
         });
-        
        r.should.have.format({type:"array",format:["text","creatorId"] })
         
     

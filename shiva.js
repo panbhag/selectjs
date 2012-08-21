@@ -25,7 +25,7 @@ var shiva = {};
  
 shiva.transform = function(input,options)
 {
-      if(_.isArray(input))
+     if(_.isArray(input))
       {
           var oArray = []
           _.each(input,function(i){
@@ -47,7 +47,39 @@ shiva.transform = function(input,options)
       
       }
 
-      var  result = {};
+
+
+    var properties;// key value pair, value can be object(mapper)/ function
+    if(properties = options.properties)
+    {
+
+      _.each(properties,function(v,k ){
+
+          if(_.isFunction(v))  //when value is a simple value integer/string
+          {
+
+              var prop_value = v(input[k]);
+              var prop_result = {};
+              prop_result[k] = prop_value;
+
+               _.extend(input,prop_result);
+          }
+          else if(_.isObject(v) ) //when value is also an object/array
+          {
+             var prop_value = shiva.transform(input[k],v);
+             var prop_result = {};
+             prop_result[k] = prop_value;
+
+              _.extend(input,prop_result);
+          }
+
+      });
+
+    }
+
+
+
+      var result = {};
       var attributeNames = _.keys(input);
 
       //only except
@@ -77,70 +109,9 @@ shiva.transform = function(input,options)
             });
       }
       
-      //modify the arrays
-      //{inputProperty:"",outputProperty:"",mapper:{}}  mapper is the standard mapData format
-      //{property:"",mapper:""}
-      //assumption: there is an array with the property name as property/inputProperty.
-      //we loop through each element of the array and map it through the mapper
-      var array;
-      if(array = options.array)
-      {
-        var arrayResult = {};
-        _.each(array,function(a){
-          
-          if(!a.inputProperty)
-          {
-            a.inputProperty = a.property;
-            a.outputProperty = a.property;
-          }
-              
-          var inputArray = input[a.inputProperty];
-          var mapper = a.mapper;
-          var outputArray = [];
-          //loop the
-          _.each(inputArray,function(ia){
-               var oa = shiva.transform(ia,mapper);
-                 
-               outputArray.push(oa);
-          
-          });    
-          
-          arrayResult[a.outputProperty] = outputArray
-           
-        
-        });
+
       
-        _.extend(result,arrayResult);
-      }
-      
-      var properties;// key value pair, value can be object(mapper)/ function
-      if(properties = options.properties)
-      {
-      
-        _.each(properties,function(v,k ){  
-        
-            if(_.isFunction(v))  //when value is a simple value integer/string
-            {
-            
-                var prop_value = v(input[k]);
-                var prop_result = {};
-                prop_result[k] = prop_value;
-                
-                 _.extend(result,prop_result);    
-            }
-            else if(_.isObject(v) ) //when value is also an object/array
-            {
-               var prop_value = shiva.transform(input[k],v);
-               var prop_result = {};
-               prop_result[k] = prop_value;
-     
-                _.extend(result,prop_result);             
-            }
-        
-        });
-      
-      }
-      
+
       //methods
       var methods;
       if (methods = options.methods) {
@@ -156,7 +127,7 @@ shiva.transform = function(input,options)
       var transform
       if(transform = options.transform)
       {
-         result = transform(result);
+          result = transform(result);
       }
 
   
