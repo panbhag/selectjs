@@ -90,12 +90,13 @@ To transform embedded objects
 ```javascript
 var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
 
-var r = shiva.transform(input,{only:["comments"],properties:{"comments":{
+var output = shiva.transform(input,{only:["comments"],properties:{"comments":{
  only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
 }
 },
 transform:function(res){ return res.comments}
 });
+//output is {comments:[{text:'hello', creatorId:12},{text:'hello2', creatorId:12}]} 
 ```
 
 
