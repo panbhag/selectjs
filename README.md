@@ -1,8 +1,9 @@
-shiva.js
+selectjs
 ========
 
-A javascript library to transform/ map json objects.
-Using this you can do the following transformations on a json object:
+A javascript library to map json objects/arrays.
+
+Using this you can do the following transformations on a json object/array:
 
  => select only some properties.
  
