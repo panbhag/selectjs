@@ -15,7 +15,7 @@ describe("format method",function(){
          var input = {x:1,y:2,z:3};
          var rename = {x:"a",y:'b',z:'c'};
          
-         var r = shiva.transform(input,{rename:rename});
+         var r = select(input,{rename:rename});
 
          r.should.have.format(["a","b","c"]);
          
@@ -25,7 +25,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = shiva.transform(input,{only:["y","z"]});
+         var r = select(input,{only:["y","z"]});
 
          r.should.have.format(["y","z"]);
          
@@ -36,7 +36,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = shiva.transform(input,{only:["y"],rename:{y:"b"} });
+         var r = select(input,{only:["y"],rename:{y:"b"} });
 
          r.should.have.format(["b"]);
          
@@ -48,7 +48,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = shiva.transform(input,{expect:["y"]});
+         var r = select(input,{expect:["y"]});
 
          r.should.have.format(["x","z"]);
          
@@ -59,7 +59,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = shiva.transform(input,{except:["y"],rename:{x:"a",z:"c"} });
+         var r = select(input,{except:["y"],rename:{x:"a",z:"c"} });
 
          r.should.have.format(["a","c"]);
          
@@ -70,7 +70,7 @@ describe("format method",function(){
     
          var input = {x:1,y:2,z:3};
          
-         var r = shiva.transform(input,{only:[],
+         var r = select(input,{only:[],
             methods:{sum:function(input){ 
                             var sum = input.x + input.y + input.z;
                             var avg = sum/3.0;
@@ -88,7 +88,7 @@ describe("format method",function(){
     it("should map an base array of objects",function(){
        var comments = [{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]
         
-       var r = shiva.transform(comments,{only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}});
+       var r = select(comments,{only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}});
        r.should.have.format({type:"array",format:["text","creatorId"] })
        
          
@@ -98,11 +98,11 @@ describe("format method",function(){
     it("should use function as a mapper for any value",function(){
     
        var input = 1;
-       var output = shiva.transform(input,function(i){return i+ 1});
+       var output = select(input,function(i){return i+ 1});
        output.should.equal(2);
        
        input = [1,2,3];
-       output = shiva.transform(input,function(i){return i+1;});
+       output = select(input,function(i){return i+1;});
        output[0].should.equal(2);
        output[1].should.equal(3);
        output[2].should.equal(4);
@@ -116,7 +116,7 @@ describe("format method",function(){
     it("should transform the result",function(){
         var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
 
-        var r = shiva.transform(input,{only:["comments"],properties:{"comments":{
+        var r = select(input,{only:["comments"],properties:{"comments":{
          only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
         }
         },
@@ -131,7 +131,7 @@ describe("format method",function(){
     
         var input = {x:10};
         
-        var r = shiva.transform(input,{properties:{x:function(v){
+        var r = select(input,{properties:{x:function(v){
              return v > 5;
         }
         }})
@@ -146,7 +146,7 @@ describe("format method",function(){
     
         var input = {x:10,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
         
-        var r = shiva.transform(input,{properties:{comments:{rename:{postText:"text",partyId:"userId"}}}})
+        var r = select(input,{properties:{comments:{rename:{postText:"text",partyId:"userId"}}}})
     
         r.should.have.format(["x",{name:'comments',type:"array",format:['text','userId']}]);
         

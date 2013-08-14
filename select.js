@@ -20,16 +20,15 @@
 //   
 //  
 
-var shiva = {};
+(function(){
+   var root = this;
 
- 
-shiva.transform = function(input,options)
-{
+   var select = function(input,options){
      if(_.isArray(input))
       {
           var oArray = []
           _.each(input,function(i){
-             var o = shiva.transform(i,options);
+             var o = select(i,options);
              oArray.push(o);
           })
           return oArray;
@@ -66,7 +65,7 @@ shiva.transform = function(input,options)
           }
           else if(_.isObject(v) ) //when value is also an object/array
           {
-             var prop_value = shiva.transform(input[k],v);
+             var prop_value = select(input[k],v);
              var prop_result = {};
              prop_result[k] = prop_value;
 
@@ -135,3 +134,11 @@ shiva.transform = function(input,options)
 
 
 }
+
+
+
+root.select = select
+
+
+
+})(this)

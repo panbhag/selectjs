@@ -25,50 +25,50 @@ underscore.js
 
 Installing
 ----------
-include the dependencies and the file shiva.js in the page you want to use.
+include the dependencies and the file select.js in the page you want to use.
 
 
 Using
 -----
 
-shiva.transform(input,options)
+select(input,options)
 
 Examples
 
 Rename object keys
 ```javascript
  var input = {x:1,y:2,z:3};
- var output = shiva.transform(input,{rename:{x:'a',y:'b',z:'c'}}); //output is  {a:1,b:2,c:3}
+ var output = select(input,{rename:{x:'a',y:'b',z:'c'}}); //output is  {a:1,b:2,c:3}
 ````
 
 Select only some keys from object
 ```javascript
 var input = {x:1,y:2,z:3};
-var output = shiva.transform(input,{only:["y","z"]}); // output is {y:2,z:3}
+var output = select(input,{only:["y","z"]}); // output is {y:2,z:3}
 ````
 
 Select some keys and rename
 ```javascript
  var input = {x:1,y:2,z:3};
- var output = shiva.transform(input,{only:["y"],rename:{y:"b"} }); //output is  {b:2}
+ var output = select(input,{only:["y"],rename:{y:"b"} }); //output is  {b:2}
 ```
 
 Select all keys except some
 ```javascript
  var input = {x:1,y:2,z:3};
- var output  = shiva.transform(input,{except:["y"]});//output is  {x:1,z:3}
+ var output  = select(input,{except:["y"]});//output is  {x:1,z:3}
 ```
 
 Select all keys except some and rename
 ```javascript
  var input = {x:1,y:2,z:3};
- var output  = shiva.transform(input,{except:["y"],rename:{x:"a",z:"c"} });//output is  {b:1,c:3}
+ var output  = select(input,{except:["y"],rename:{x:"a",z:"c"} });//output is  {b:1,c:3}
 ```
 
 Add new key(s) value of which is based on other keys
 ```javascript         
  var input = {x:1,y:2,z:3};
- var output = shiva.transform(input,{only:[],
+ var output = select(input,{only:[],
             methods:{sum:function(input){ 
                             var sum = input.x + input.y + input.z;
                             var avg = sum/3.0;
@@ -83,7 +83,7 @@ Add new key(s) value of which is based on other keys
 If the input object is an array of objects, then the transformation is applied to all the objects
 ```javascript
   var comments = [{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]
-  var output = shiva.transform(comments,{only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}});
+  var output = select(comments,{only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}});
   //output is [{id:"1", text:"hello",creatorId:12},{id:"2",text:"hello2",creatorId:2}]    
 ```
 
@@ -91,7 +91,7 @@ To transform embedded objects
 ```javascript
 var input = {x:1,comments:[{id:"1",postText:"hello",partyId:12},{id:"2",postText:"hello2",partyId:2}]};
 
-var output = shiva.transform(input,{only:["comments"],properties:{"comments":{
+var output = select(input,{only:["comments"],properties:{"comments":{
  only:["postText","partyId"], rename:{"postText":"text",partyId:"creatorId"}
 }
 },
@@ -105,7 +105,7 @@ transform:function(res){ return res.comments}
 
 Documentation
 -----
-shiva.transform(input,options)
+select(input,options)
 
 input can be any object/basic data type, array. if it is an array, the mapping will be applied to each data.
 
@@ -124,7 +124,7 @@ property specific tranformation: can replace the array syntax,and methods for si
 
 properties
 
-comments:mapper, // does shiva.transform(comments,mapper)
+comments:mapper, // does select(comments,mapper)
 
 comments:function(){}, // does manipulation on the value of comments, if comments is an array will apply on each value.   
 
