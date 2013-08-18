@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Selectjs : A javascript library to map and transfrom json object/arrays" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Selectjs</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/panbhag/selectjs">View on GitHub</a>
+
+          <h1 id="project_title">Selectjs</h1>
+          <h2 id="project_tagline">A javascript library to map and transfrom json object/arrays</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/panbhag/selectjs/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/panbhag/selectjs/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="selectjs" class="anchor" href="#selectjs"><span class="octicon octicon-link"></span></a>selectjs</h1>
+
+<p>A javascript library to map json objects/arrays.</p>
+
+<p>Using this you can do the following transformations on a json object/array:</p>
+
+<p>=&gt; select only some properties.</p>
+
+<p>=&gt; select all but some properties.</p>
+
+<p>=&gt; rename properties.</p>
+
+<p>=&gt; transform individual properties</p>
+
+<p>=&gt; do the above operations on an array.</p>
+
+<h2>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies:</h2>
+
+<p>underscore.js</p>
+
+<h2>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h2>
+
+<p>include the dependencies and the file select.js in the page you want to use.</p>
+
+<h2>
+<a name="using" class="anchor" href="#using"><span class="octicon octicon-link"></span></a>Using</h2>
+
+<p>select(input,options)</p>
+
+<p>Examples</p>
+
+<p>Rename object keys</p>
+
+<div class="highlight"><pre> <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">rename</span><span class="o">:</span><span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="s1">'a'</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="s1">'b'</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="s1">'c'</span><span class="p">}});</span> <span class="c1">//output is  {a:1,b:2,c:3}</span>
+</pre></div>
+
+<p>Select only some keys from object</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">only</span><span class="o">:</span><span class="p">[</span><span class="s2">"y"</span><span class="p">,</span><span class="s2">"z"</span><span class="p">]});</span> <span class="c1">// output is {y:2,z:3}</span>
+</pre></div>
+
+<p>Select some keys and rename</p>
+
+<div class="highlight"><pre> <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">only</span><span class="o">:</span><span class="p">[</span><span class="s2">"y"</span><span class="p">],</span><span class="nx">rename</span><span class="o">:</span><span class="p">{</span><span class="nx">y</span><span class="o">:</span><span class="s2">"b"</span><span class="p">}</span> <span class="p">});</span> <span class="c1">//output is  {b:2}</span>
+</pre></div>
+
+<p>Select all keys except some</p>
+
+<div class="highlight"><pre> <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">output</span>  <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">except</span><span class="o">:</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]});</span><span class="c1">//output is  {x:1,z:3}</span>
+</pre></div>
+
+<p>Select all keys except some and rename</p>
+
+<div class="highlight"><pre> <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">output</span>  <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">except</span><span class="o">:</span><span class="p">[</span><span class="s2">"y"</span><span class="p">],</span><span class="nx">rename</span><span class="o">:</span><span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="s2">"a"</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="s2">"c"</span><span class="p">}</span> <span class="p">});</span><span class="c1">//output is  {b:1,c:3}</span>
+</pre></div>
+
+<p>Add new key(s) value of which is based on other keys</p>
+
+<div class="highlight"><pre> <span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">y</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span><span class="nx">z</span><span class="o">:</span><span class="mi">3</span><span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">only</span><span class="o">:</span><span class="p">[],</span>
+            <span class="nx">methods</span><span class="o">:</span><span class="p">{</span><span class="nx">sum</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">input</span><span class="p">){</span> 
+                            <span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">z</span><span class="p">;</span>
+                            <span class="kd">var</span> <span class="nx">avg</span> <span class="o">=</span> <span class="nx">sum</span><span class="o">/</span><span class="mf">3.0</span><span class="p">;</span>
+                            <span class="k">return</span> <span class="p">{</span><span class="nx">sum</span><span class="o">:</span><span class="nx">sum</span><span class="p">,</span><span class="nx">avg</span><span class="o">:</span><span class="nx">avg</span><span class="p">}</span>
+           <span class="p">}</span> 
+                        <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="c1">//output is {sum:6,avg:2}</span>
+</pre></div>
+
+<p>If the input object is an array of objects, then the transformation is applied to all the objects</p>
+
+<div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">comments</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">id</span><span class="o">:</span><span class="s2">"1"</span><span class="p">,</span><span class="nx">postText</span><span class="o">:</span><span class="s2">"hello"</span><span class="p">,</span><span class="nx">partyId</span><span class="o">:</span><span class="mi">12</span><span class="p">},{</span><span class="nx">id</span><span class="o">:</span><span class="s2">"2"</span><span class="p">,</span><span class="nx">postText</span><span class="o">:</span><span class="s2">"hello2"</span><span class="p">,</span><span class="nx">partyId</span><span class="o">:</span><span class="mi">2</span><span class="p">}]</span>
+  <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">comments</span><span class="p">,{</span><span class="nx">only</span><span class="o">:</span><span class="p">[</span><span class="s2">"postText"</span><span class="p">,</span><span class="s2">"partyId"</span><span class="p">],</span> <span class="nx">rename</span><span class="o">:</span><span class="p">{</span><span class="s2">"postText"</span><span class="o">:</span><span class="s2">"text"</span><span class="p">,</span><span class="nx">partyId</span><span class="o">:</span><span class="s2">"creatorId"</span><span class="p">}});</span>
+  <span class="c1">//output is [{id:"1", text:"hello",creatorId:12},{id:"2",text:"hello2",creatorId:2}]    </span>
+</pre></div>
+
+<p>To transform embedded objects</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">comments</span><span class="o">:</span><span class="p">[{</span><span class="nx">id</span><span class="o">:</span><span class="s2">"1"</span><span class="p">,</span><span class="nx">postText</span><span class="o">:</span><span class="s2">"hello"</span><span class="p">,</span><span class="nx">partyId</span><span class="o">:</span><span class="mi">12</span><span class="p">},{</span><span class="nx">id</span><span class="o">:</span><span class="s2">"2"</span><span class="p">,</span><span class="nx">postText</span><span class="o">:</span><span class="s2">"hello2"</span><span class="p">,</span><span class="nx">partyId</span><span class="o">:</span><span class="mi">2</span><span class="p">}]};</span>
+
+<span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">select</span><span class="p">(</span><span class="nx">input</span><span class="p">,{</span><span class="nx">only</span><span class="o">:</span><span class="p">[</span><span class="s2">"comments"</span><span class="p">],</span><span class="nx">properties</span><span class="o">:</span><span class="p">{</span><span class="s2">"comments"</span><span class="o">:</span><span class="p">{</span>
+ <span class="nx">only</span><span class="o">:</span><span class="p">[</span><span class="s2">"postText"</span><span class="p">,</span><span class="s2">"partyId"</span><span class="p">],</span> <span class="nx">rename</span><span class="o">:</span><span class="p">{</span><span class="s2">"postText"</span><span class="o">:</span><span class="s2">"text"</span><span class="p">,</span><span class="nx">partyId</span><span class="o">:</span><span class="s2">"creatorId"</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="p">},</span>
+<span class="nx">transform</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">comments</span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//output is {comments:[{text:'hello', creatorId:12},{text:'hello2', creatorId:12}]} </span>
+</pre></div>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>select(input,options)</p>
+
+<p>input can be any object/basic data type, array. if it is an array, the mapping will be applied to each data.</p>
+
+<p>options: it can be a function or a object
+if it is a function then it takes the input as the argument and output is the return value of the function. If the input is an array then the function is called for each input element.</p>
+
+<p>if the input is an array then the function is executed for each element of the array. and the output array is returned.</p>
+
+<p>options can be an object with following options
+only: array of fields to select only</p>
+
+<p>except: array of fields to be excluded. At a time only one of the options "only" or "except" should be used</p>
+
+<p>rename: object of key value pair, with key as current name, property as new name
+property specific tranformation: can replace the array syntax,and methods for simple </p>
+
+<p>properties</p>
+
+<p>comments:mapper, // does select(comments,mapper)</p>
+
+<p>comments:function(){}, // does manipulation on the value of comments, if comments is an array will apply on each value.   </p>
+
+<p>methods: array of methods which return a key value pair which is merged into result
+array: input property, output property or only property(no rename), mapper: to map each element</p>
+
+<p>transform: passes the result to transform function which transforms the result(obtained after applying all options) and returns the final result</p>
+
+<p>pending: 
+pipes: temp(transform)</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Selectjs maintained by <a href="https://github.com/panbhag">panbhag</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-43262398-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
